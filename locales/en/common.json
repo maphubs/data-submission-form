@@ -1,0 +1,6 @@
+{
+  "integrates_react-i18next": "this sample integrates react-i18next for simple internationalization.",
+  "footer": {
+    "message": "This is the footer"
+  }
+}

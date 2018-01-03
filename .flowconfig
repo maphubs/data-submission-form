@@ -1,0 +1,8 @@
+[ignore]
+temp/*
+.next/*
+[libs]
+types/
+node_modules/*
+[options]
+module.ignore_non_literal_requires=true

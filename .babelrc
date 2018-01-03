@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "modules": "commonjs"
+        }
+      }
+    ],
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": false
+      }
+    ]
+  ]
+}
