@@ -3,5 +3,7 @@ services:
   web:
     build:
       context: .
-    expose:
-      - '4000'
+    env_file:
+      - .env
+    ports:
+      - '4006:4006'

@@ -1,10 +1,9 @@
 // @flow
 import React from 'react'
-
+import scaleStyles from 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
 // Want to use mapbox-gl packaged with react-map-gl
 // eslint-disable-next-line import/no-extraneous-dependencies
-import styles from 'mapbox-gl/dist/mapbox-gl.css'
-import scaleStyles from 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
+import styles from '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 
 let mapboxgl = {}
 let ScalePositionControl
