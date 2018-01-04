@@ -93,8 +93,6 @@ class DataSubmitWizard extends React.Component<Props, State> {
   }
 
   render () {
-    console.log('RENDER')
-    console.log(config)
     const { t, i18n } = this.props
     const { current, active } = this.state
 

@@ -95,21 +95,14 @@ class Location extends Component<Props, State> {
   onSearchClick = (result) => {
     const { feature } = result
     const map = this.map.getMap()
+    console.log(feature)
     /* eslint-disable no-underscore-dangle */
-    if (feature.bbox) {
-      map.fitBounds(feature.bbox, {
+    if (feature.boundingbox) {
+      map.fitBounds(feature.boundingbox, {
         padding: 25, curve: 3, speed: 0.6, maxZoom: 16
       })
-    } else if (feature._geometry || feature.geometry) {
-      const geometry = feature._geometry ? feature._geometry : feature.geometry
-      if (geometry.type === 'Point') {
-        map.flyTo({ center: geometry.coordinates })
-      } else {
-        const bbox = turfbbox(geometry)
-        map.fitBounds(bbox, {
-          padding: 25, curve: 3, speed: 0.6, maxZoom: 22
-        })
-      }
+    } else if (feature.lat && feature.lon) {
+      map.flyTo({ center: [feature.lon, feature.lat] })
     }
   }
 

@@ -4,6 +4,8 @@ import request from 'superagent'
 import { message } from 'antd'
 import SearchBox from '../../Forms/SearchBox'
 
+import config from '../../../utils/env'
+
 type Props = {
   onOptionClick: Function
 }
@@ -16,20 +18,23 @@ export default class LocationSearch extends React.Component<Props, State> {
   }
 
   handleSearch = (value: string) => {
-    const url = `https://search.mapzen.com/v1/autocomplete?text=${value}&api_key=mapzen-7K425Zt`
+    if (!value) return null
+    const url = `https://geocoder.tilehosting.com/q/${value}.js?key=${config.OSMNAMES_API_KEY}`
+    // const url = `https://search.mapzen.com/v1/autocomplete?text=${value}&api_key=mapzen-7K425Zt`
     return request.get(url)
       .then((res) => {
-        const { features } = res.body
-        if (features) {
-          const results = features.map((feature) => {
-            const { id, name, label } = feature.properties
+        const { count, results } = res.body
+        if (count > 0 && results) {
+          const features = results.map((feature) => {
+            /* eslint-disable camelcase */
+            const { id, name, display_name } = feature
             return {
-              key: id,
-              value: label || name,
+              key: `${id}`,
+              value: display_name || name,
               feature
             }
           })
-          return (results)
+          return (features)
         } // else
         throw new Error('features not found')
       })
@@ -41,7 +46,11 @@ export default class LocationSearch extends React.Component<Props, State> {
 
   render () {
     return (
-      <SearchBox handleSearch={this.handleSearch} onOptionClick={this.props.onOptionClick} />
+      <SearchBox
+        handleSearch={this.handleSearch}
+        onOptionClick={this.props.onOptionClick}
+        placeholder="Search for City/Place"
+      />
     )
   }
 }

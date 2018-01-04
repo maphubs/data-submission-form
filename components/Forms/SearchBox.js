@@ -1,12 +1,13 @@
 // @flow
 import React from 'react'
-import { AutoComplete, Input, Button, Icon } from 'antd'
+import { AutoComplete } from 'antd'
 
 const { Option } = AutoComplete
 
 type Props = {
   handleSearch: Function,
-  onOptionClick: Function
+  onOptionClick: Function,
+  placeholder: string
 }
 type State = {
   result: Array<{key: string, value: string}>
@@ -18,9 +19,11 @@ export default class SearchBox extends React.Component<Props, State> {
   }
 
   onSelect = (key: string) => {
+    console.log(`selecting: ${key}`)
     const { onOptionClick } = this.props
     this.state.result.forEach((item) => {
       if (item.key === key) {
+        console.log(`FOUND: ${key}`)
         onOptionClick(item)
       }
     })
@@ -28,7 +31,6 @@ export default class SearchBox extends React.Component<Props, State> {
 
   handleSearch = async (value: string) => {
     const result = await this.props.handleSearch(value)
-    console.log(result)
     this.setState({ result })
   }
 
@@ -86,9 +88,10 @@ export default class SearchBox extends React.Component<Props, State> {
             className="location-search"
             style={{ width: '100%' }}
             onSearch={this.handleSearch}
-            placeholder="Search for City/Place/Address"
+            placeholder={this.props.placeholder}
             dataSource={options}
             onSelect={this.onSelect}
+            allowClear
           />
         </div>
       </div>
