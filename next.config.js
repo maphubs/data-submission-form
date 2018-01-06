@@ -28,25 +28,6 @@ module.exports = {
       use: [{ loader: 'raw-loader' }]
     })
 
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        {
-          loader: 'emit-file-loader',
-          options: {
-            name: 'dist/[path][name].[ext].js'
-          }
-        },
-        {
-          loader: 'babel-loader',
-          options: {
-            babelrc: false,
-            extends: path.resolve(__dirname, './.babelrc')
-          }
-        },
-        'styled-jsx-css-loader'
-      ]
-    })
     if (!config.module.noParse) {
       config.module.noParse = []
     }

@@ -1,6 +1,10 @@
 // @flow
 import React from 'react'
-import scaleStyles from 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
+
+// can only import one css file per component for some reason...
+// so injecting manually for now below
+// import scaleStyles from 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
+
 // Want to use mapbox-gl packaged with react-map-gl
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styles from '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
@@ -111,30 +115,72 @@ export default class Map extends React.Component<Props, State> {
     return (
       <div style={style}>
         <style jsx global>{styles}</style>
-        <style jsx global>{scaleStyles}</style>
-        <style jsx global>{`
-          .maphubs-ctrl-scale {
-            left: 5px;
-          }
-        
-          .map-position {
-            left: 0;
-          }
-        
-          .metric-scale {
-            left: 0;
-          }
-        
-          .imperial-scale {
-            left: 0;
-          }
-        `}
-        </style>
         <style jsx global>{`
           .mapboxgl-canvas {
             left: 0;
           }
-        `}
+
+          .maphubs-ctrl-scale {
+            border: none !important;
+            padding: 0  !important;
+            background-color: inherit  !important;
+            position: relative;
+            height: 22px;
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            height: 34px;
+            margin: 0px !important;
+          }
+        
+          .map-position {
+            height: 12px;
+            width: 75px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.55);
+            font-size: 10px;
+            line-height: 10px;
+            text-align: center;
+            box-shadow: none !important;
+              color: #333;
+          }
+        
+          .metric-scale {
+            height: 12px;
+            font-size: 10px;
+            line-height: 10px;
+            text-align: center;
+            box-shadow: none !important;
+            background-color: rgba(255, 255, 255, 0.55);
+            border-width: medium 2px 2px;
+            border-style: none solid solid;
+            border-color: #333;
+            padding: 0 5px;
+            color: #333;
+            position: absolute;
+            top: 12px;
+            left: 0;
+          }
+        
+          .imperial-scale {
+            height: 12px;
+            font-size: 10px;
+            line-height: 10px;
+            text-align: center;
+            box-shadow: none !important;
+            background-color: rgba(255, 255, 255, 0.55);
+            border-width: medium 2px 2px;
+            border-style: solid solid none;
+            border-color: #333;
+            padding: 0 5px;
+            color: #333;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }        
+          `}
         </style>
         <div id={id} style={{ width: '100%', height: '100%' }}>
           {children}

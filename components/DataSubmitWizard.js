@@ -1,8 +1,7 @@
 //  @flow
 import React from 'react'
-import { Row, Steps, Button, message, Icon } from 'antd'
+import { Row, Col, Steps, Button, message, Icon } from 'antd'
 import { translate } from 'react-i18next'
-import 'isomorphic-unfetch'
 import request from 'superagent'
 
 import i18nHelper from '../i18n'
@@ -16,7 +15,8 @@ const { Step } = Steps
 
 type Props = {
   t: any,
-  i18n: any
+  i18n: any,
+  showActivateButton?: boolean
 }
 
 type State = {
@@ -93,7 +93,7 @@ class DataSubmitWizard extends React.Component<Props, State> {
   }
 
   render () {
-    const { t, i18n } = this.props
+    const { t, i18n, showActivateButton } = this.props
     const { current, active } = this.state
 
     const stepContent = [{
@@ -110,14 +110,14 @@ class DataSubmitWizard extends React.Component<Props, State> {
       icon: 'smile-o'
     }]
 
-    if (!active) {
+    if (!active && showActivateButton) {
       return (
         <EmbedLayout title={t('Data Submission Form')} t={t} language={i18n.language}>
           <div style={{ height: '100%', width: '100%', textAlign: 'center' }}>
             <Button
               type="primary"
               size="large"
-              style={{ top: '50%' }}
+              style={{ top: '50px' }}
               onClick={this.activate}
             >
               Submit a Location
@@ -131,12 +131,10 @@ class DataSubmitWizard extends React.Component<Props, State> {
       <EmbedLayout title={t('Data Submission Form')} t={t} language={i18n.language}>
         <style jsx>{`
           .data-submit-wizard {
-            padding: 2%;
             height: 100%;
             width: 100%;
           }
           .steps-content {
-            margin-top: 16px;
             border: 1px solid #e9e9e9;
             border-radius: 6px;
             background-color: #fafafa;
@@ -148,47 +146,66 @@ class DataSubmitWizard extends React.Component<Props, State> {
           .steps-action {
             margin-top: 24px;
           }
+
+          .wizard-steps-col {
+            height: 75px;
+            padding: 10px;
+          }
+
+          .wizard-content {
+            height: ~"calc(100% - 75px)";
+          }
+
+          @media (max-width: 576px) {
+
+            .wizard-content {
+              height: 100%;
+            }
+
+            .wizard-steps-col {
+              height: 0px;
+              display: none;
+            }
+          }
         `}
         </style>
         <div className="data-submit-wizard">
-          <Row style={{ height: '100px' }}>
-            <h2 style={{ textAlign: 'center' }}>Submit a Closed Retail Location</h2>
-            <Steps current={current}>
-              {stepContent.map(item => (
-                <Step
-                  key={item.title}
-                  title={item.title}
-                  description={item.description}
-                  icon={<Icon type={item.icon} />}
-                />
-              ))}
-            </Steps>
+          <Row>
+            <div className="wizard-steps-col">
+              <Col span={24}>
+                
+                <Steps current={current}>
+                  {stepContent.map(item => (
+                    <Step
+                      style={{ color: 'red' }}
+                      key={item.title}
+                      title={item.title}
+                      description={item.description}
+                      icon={<Icon type={item.icon} />}
+                    />
+                  ))}
+                </Steps>
+              </Col>
+            </div>
           </Row>
-          <Row style={{ height: 'calc(100% - 150px)' }}>
-            <div className="steps-content" style={{ display: current === 0 ? 'block' : 'none' }}>
-              <Location onSelected={this.onLocationSelected} />
-            </div>
-            <div className="steps-content" style={{ display: current === 1 ? 'block' : 'none' }}>
-              <Info onSubmit={this.onPropertiesChange} name="test" />
-            </div>
-            {current === 2 &&
-              <div className="steps-content">
-                <Row style={{ top: '50%' }}>
-                  <h3>Thank You!</h3>
-                  <p>Thank you for contributing.</p>
-                </Row>
+          <div className="wizard-content">
+            <Row style={{ height: '100%' }}>
+              <div className="steps-content" style={{ display: current === 0 ? 'block' : 'none' }}>
+                <Location onSelected={this.onLocationSelected} />
               </div>
-            }
-          </Row>
-          <Row style={{ height: '50px' }}>
-            <div className="steps-action">
-              {this.state.current > 0 &&
-                <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-                  Back
-                </Button>
+              <div className="steps-content" style={{ display: current === 1 ? 'block' : 'none' }}>
+                <Info onSubmit={this.onPropertiesChange} onPrev={() => this.prev()} name="test" />
+              </div>
+              {current === 2 &&
+                <div className="steps-content">
+                  <Row style={{ top: '50%' }}>
+                    <h3>Thank You!</h3>
+                    <p>Thank you for contributing.</p>
+                  </Row>
+                </div>
               }
-            </div>
-          </Row>
+            </Row>
+          </div>
         </div>
       </EmbedLayout>
     )

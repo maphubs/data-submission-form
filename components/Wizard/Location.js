@@ -1,10 +1,8 @@
 //  @flow
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-// import ReactMapGL, { NavigationControl } from 'react-map-gl'
 import { Row, Icon, Button } from 'antd'
 import { geolocated } from 'react-geolocated'
-import turfbbox from '@turf/bbox'
 
 import style from './Map/osm-liberty-tz.json'
 import LocationSearch from './Map/LocationSearch'

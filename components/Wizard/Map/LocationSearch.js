@@ -20,7 +20,6 @@ export default class LocationSearch extends React.Component<Props, State> {
   handleSearch = (value: string) => {
     if (!value) return null
     const url = `https://geocoder.tilehosting.com/q/${value}.js?key=${config.OSMNAMES_API_KEY}`
-    // const url = `https://search.mapzen.com/v1/autocomplete?text=${value}&api_key=mapzen-7K425Zt`
     return request.get(url)
       .then((res) => {
         const { count, results } = res.body
@@ -49,7 +48,7 @@ export default class LocationSearch extends React.Component<Props, State> {
       <SearchBox
         handleSearch={this.handleSearch}
         onOptionClick={this.props.onOptionClick}
-        placeholder="Search for City/Place"
+        placeholder="Search for a City or Place"
       />
     )
   }

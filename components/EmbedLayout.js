@@ -74,23 +74,26 @@ type State = {
 }
 
 class EmbedLayout extends React.Component<Props, State> {
-  state = {
-    
-  };
+  state = {}
 
   render () {
     const {
       language, title, children
     } = this.props
+
     return (
       <div>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <title>{title}</title>
-          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/antd/3.0.3/antd.min.css" />
           <link rel="stylesheet" type="text/css' href='/static/nprogress.css" />
         </Head>
+        <style jsx global>{`        
+          @import "./node_modules/antd/dist/antd.less";
+          @import "./theme.less";
+        `}
+        </style>
         <LocaleProvider locale={getAntLocale(language)}>
           <Layout style={{ height: '100vh', minHeight: '100vh', background: 'none' }}>
             {children}
