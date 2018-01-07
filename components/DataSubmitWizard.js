@@ -1,6 +1,6 @@
 //  @flow
 import React from 'react'
-import { Row, Col, Steps, Button, message, Icon } from 'antd'
+import { Row, Col, Steps, Button, message, Icon, Spin } from 'antd'
 import { translate } from 'react-i18next'
 import request from 'superagent'
 
@@ -16,14 +16,16 @@ const { Step } = Steps
 type Props = {
   t: any,
   i18n: any,
-  showActivateButton?: boolean
+  showActivateButton?: boolean,
+  onComplete: Function
 }
 
 type State = {
   current: number,
   geometry?: Object,
   properties?: Object,
-  active: boolean
+  active: boolean,
+  sending: boolean
 }
 
 class DataSubmitWizard extends React.Component<Props, State> {
@@ -31,14 +33,15 @@ class DataSubmitWizard extends React.Component<Props, State> {
     super(props)
     this.state = {
       current: 0,
-      active: false
+      active: false,
+      sending: false
     }
   }
 
   onPropertiesChange = async (properties) => {
     this.setState({ properties })
     try {
-      await this.onSubmit()
+      await this.onSubmit(properties)
       this.next()
     } catch (err) {
       message.error(`Error: ${err.message}`)
@@ -55,9 +58,9 @@ class DataSubmitWizard extends React.Component<Props, State> {
     this.next()
   }
 
-  onSubmit = async () => {
-    // TODO: submit data to MapHubs
-    const { geometry, properties } = this.state
+  onSubmit = async (properties: Object) => {
+    this.setState({ sending: true })
+    const { geometry } = this.state
     const feature = {
       type: 'Feature',
       geometry,
@@ -72,11 +75,22 @@ class DataSubmitWizard extends React.Component<Props, State> {
         layer_id: config.MAPHUBS_LAYER_ID,
         feature
       })
+    this.setState({ sending: false })
     if (!res.body || !res.body.success) {
       const err = res.body.error || 'error sending data to the server'
       throw new Error(err)
     }
     return true
+  }
+
+  onComplete = () => {
+    if (this.props.onComplete) {
+      this.props.onComplete()
+    }
+  }
+
+  onSubmitAnother = () => {
+    location.reload()
   }
 
   activate = () => {
@@ -91,6 +105,8 @@ class DataSubmitWizard extends React.Component<Props, State> {
     const current = this.state.current - 1
     this.setState({ current })
   }
+
+  location: any
 
   render () {
     const { t, i18n, showActivateButton } = this.props
@@ -173,7 +189,6 @@ class DataSubmitWizard extends React.Component<Props, State> {
           <Row>
             <div className="wizard-steps-col">
               <Col span={24}>
-                
                 <Steps current={current}>
                   {stepContent.map(item => (
                     <Step
@@ -188,19 +203,29 @@ class DataSubmitWizard extends React.Component<Props, State> {
               </Col>
             </div>
           </Row>
-          <div className="wizard-content">
+          <div className="wizard-content">          
             <Row style={{ height: '100%' }}>
               <div className="steps-content" style={{ display: current === 0 ? 'block' : 'none' }}>
                 <Location onSelected={this.onLocationSelected} />
               </div>
               <div className="steps-content" style={{ display: current === 1 ? 'block' : 'none' }}>
-                <Info onSubmit={this.onPropertiesChange} onPrev={() => this.prev()} name="test" />
+                <Spin size="large" spinning={this.state.sending} style={{ left: 0, height: '100%' }}>
+                  <Info onSubmit={this.onPropertiesChange} onPrev={() => this.prev()} name="test" />
+                </Spin>
               </div>
               {current === 2 &&
                 <div className="steps-content">
-                  <Row style={{ top: '50%' }}>
+                  <Row style={{ top: '25%' }}>
                     <h3>Thank You!</h3>
-                    <p>Thank you for contributing.</p>
+                    <p>Thank you for contributing</p>
+                  </Row>
+                  <Row style={{ top: '50%' }}>
+                    <Col span={12}>
+                      <Button type="primary" size="large" onClick={this.onSubmitAnother}>Submit Another Location</Button>
+                    </Col>
+                    <Col span={12}>
+                      <Button type="primary" size="large" onClick={this.onComplete}>Done</Button>
+                    </Col>
                   </Row>
                 </div>
               }
