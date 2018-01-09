@@ -1,3 +1,8 @@
+.git
+.env
+.eslintrc
+README.md
 node_modules
 npm-debug.log
 .next
+theme.less

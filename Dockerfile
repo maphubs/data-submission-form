@@ -4,12 +4,12 @@ RUN mkdir -p /app
 WORKDIR /app
 # Install app dependencies
 COPY package.json yarn.lock .yarnclean /app/
-RUN apk add --no-cache make gcc g++ python libx11-dev libxext && \
+RUN apk add --no-cache wget make gcc g++ python libx11-dev libxext && \
   yarn install --production --pure-lockfile && \
-  yarn clean --force  && \
+  yarn autoclean --force  && \
   apk del make gcc g++ python libx11-dev libxext
 # Bundle app source
 COPY . /app
-RUN yarn run build
+RUN chmod +x /app/docker-entrypoint.sh
 EXPOSE 4006
-CMD [ "yarn", "start" ]
+CMD /app/docker-entrypoint.sh

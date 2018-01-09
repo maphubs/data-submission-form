@@ -169,7 +169,7 @@ class DataSubmitWizard extends React.Component<Props, State> {
           }
 
           .wizard-content {
-            height: ~"calc(100% - 75px)";
+            height: calc(100% - 75px);
           }
 
           @media (max-width: 576px) {

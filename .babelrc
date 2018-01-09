@@ -3,22 +3,14 @@
     [
       "next/babel",
       {
-        "styled-jsx": {
-          "plugins": [
-            "styled-jsx-plugin-less"
-          ]
+        "preset-env": {
+          "modules": "commonjs"
         }
       }
     ],
     "stage-0"
   ],
   "plugins": [
-    [
-      "inline-import",
-      {
-        "extensions": [".css"]
-      }
-    ],
     "transform-decorators-legacy",
     [
       "import",

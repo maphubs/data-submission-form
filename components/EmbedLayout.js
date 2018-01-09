@@ -21,6 +21,8 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 import { Layout, LocaleProvider } from 'antd'
 
+import styles from '../static/style.css'
+
 Router.onRouteChangeStart = (url) => {
   // console.log(`Loading: ${url}`)
   NProgress.start()
@@ -86,19 +88,16 @@ class EmbedLayout extends React.Component<Props, State> {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
-          <title>{title}</title>
-          <link rel="stylesheet" type="text/css' href='/static/nprogress.css" />
+          <title>{title}</title>         
         </Head>
-        <style jsx global>{`        
-          @import "./node_modules/antd/dist/antd.less";
-          @import "./theme.less";
-        `}
-        </style>
+        <style jsx global>{styles}</style>
         <LocaleProvider locale={getAntLocale(language)}>
           <Layout style={{ height: '100vh', minHeight: '100vh', background: 'none' }}>
+            
             {children}
           </Layout>
         </LocaleProvider>
+        
       </div>
     )
   }

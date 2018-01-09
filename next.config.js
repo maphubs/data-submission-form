@@ -1,4 +1,4 @@
-const { WebpackBundleSizeAnalyzerPlugin } = require('webpack-bundle-size-analyzer')
+// const { WebpackBundleSizeAnalyzerPlugin } = require('webpack-bundle-size-analyzer')
 const path = require('path')
 
 const pathToMapboxGL = path.resolve(__dirname, './node_modules/mapbox-gl/dist/mapbox-gl.js')
@@ -10,7 +10,7 @@ module.exports = {
   webpack (nextConfig) {
     const config = nextConfig
     if (ANALYZE) {
-      config.plugins.push(new WebpackBundleSizeAnalyzerPlugin('stats.txt'))
+      // config.plugins.push(new WebpackBundleSizeAnalyzerPlugin('stats.txt'))
     }
 
     config.resolve = {
@@ -22,6 +22,26 @@ module.exports = {
     config.node = {
       fs: 'empty'
     }
+
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        {
+          loader: 'emit-file-loader',
+          options: {
+            name: 'dist/[path][name].[ext].js'
+          }
+        },
+        {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            extends: path.resolve(__dirname, './.babelrc')
+          }
+        },
+        'styled-jsx-css-loader'
+      ]
+    })
 
     config.module.rules.push({
       test: /\.(glsl|vert|frag)([\?]?.*)$/,
