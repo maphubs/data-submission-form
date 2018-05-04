@@ -1,17 +1,15 @@
 {
   "name": "data-submission-form",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",
-    "build": "next build",
+    "build": "NODE_ENV=production ASSET_CDN_PREFIX=https://hpvhe47439ygwrt.belugacdn.link/maphubs/data-submission-form node --max_old_space_size=4096 node_modules/next/dist/bin/next-build",
+    "export": "NODE_ENV=production ASSET_CDN_PREFIX=https://hpvhe47439ygwrt.belugacdn.link/maphubs/data-submission-form node node_modules/next/dist/bin/next-export -o .next-export",
     "start": "NODE_ENV=production node server.js",
-    "preversion": "",
-    "version": "",
-    "postversion": "git push && git push --tags",
-    "deploy-patch": "npm version patch --force -m \"version %s\"",
-    "deploy-minor": "npm version minor --force -m \"version %s\"",
+    "deploy-patch": "node patch && yarn run deploy",
+    "deploy": "/bin/sh deploy.sh",
     "analyze": "cross-env ANALYZE=1 next build && cat .next/stats.txt"
   },
   "dependencies": {

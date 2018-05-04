@@ -5,4 +5,7 @@ README.md
 node_modules
 npm-debug.log
 .next
+.next-export
 theme.less
+yarn-error.log
+docker-compose.yml

@@ -31,6 +31,9 @@ i18n
       .then(() => {
         const server = express()
 
+        // server static CSS file
+        server.use('/static', express.static('static'))
+
         // enable middleware for i18next
         server.use(i18nextMiddleware.handle(i18n))
 

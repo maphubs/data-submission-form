@@ -7,8 +7,13 @@ const useCDN = (ASSET_CDN_PREFIX && process.NODE_ENV === 'production')
 
 module.exports = {
   assetPrefix: useCDN ? ASSET_CDN_PREFIX : '',
-  webpack (nextConfig) {
-    const config = nextConfig
+  webpack (config, { dev }) {
+    if (dev) {
+      config.devtool = 'source-map'
+    } else {
+      config.devtool = 'source-map'
+    }
+
     if (ANALYZE) {
       // config.plugins.push(new WebpackBundleSizeAnalyzerPlugin('stats.txt'))
     }
