@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom'
 import { Row, Icon, Button } from 'antd'
 import { geolocated } from 'react-geolocated'
 
-import style from './Map/osm-liberty-tz.json'
 import LocationSearch from './Map/LocationSearch'
 import Map from './Map/Map'
+
+import config from '../../utils/env'
 
 let mapboxgl = {}
 if (typeof window !== 'undefined') {
@@ -117,7 +118,7 @@ class Location extends Component<Props, State> {
             ref={(map) => { this.map = map }}
             style={{ width: '100%', height: '100%' }}
             {...viewport}
-            mapStyle={style}
+            mapStyle={`https://maps.tilehosting.com/styles/streets/style.json?key=${config.TILEHOSTING_MAPS_API_KEY}`}
             onClick={this.onMapClick}
             showScale
             hash

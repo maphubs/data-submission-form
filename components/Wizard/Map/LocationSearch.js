@@ -19,7 +19,7 @@ export default class LocationSearch extends React.Component<Props, State> {
 
   handleSearch = (value: string) => {
     if (!value) return null
-    const url = `https://geocoder.tilehosting.com/q/${value}.js?key=${config.OSMNAMES_API_KEY}`
+    const url = `https://geocoder.tilehosting.com/q/${value}.js?key=${config.TILEHOSTING_GEOCODING_API_KEY}`
     return request.get(url)
       .then((res) => {
         const { count, results } = res.body
