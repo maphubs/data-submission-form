@@ -1,8 +1,10 @@
 node_modules
-.next
+.next-export
 .DS_Store
 .env
 theme.less
 yarn-error.log
 style.css
 themes
+.next/*
+!.next/BUILD_ID
