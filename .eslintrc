@@ -29,25 +29,41 @@
     }
   },
   "extends": [
-    "airbnb-standard",
-    "plugin:react/recommended", 
-    "plugin:promise/recommended",
-    "plugin:security/recommended"
+    "standard", "standard-react",
+    "plugin:security/recommended",
+    "plugin:unicorn/recommended"
   ],
   "rules": {
-    "semi": [2, "never"],
-    "react/jsx-filename-extension": "off",
-    "react/jsx-curly-brace-presence": "off"
+    "flowtype/define-flow-type": 1,
+    "flowtype/use-flow-type": 1,
+    "security/detect-object-injection": "off",
+    "unicorn/filename-case": "off",
+    "camelcase": "off"
+  },
+
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+
+  "globals": {
+    "L": true,
+    "HS": true,
+    "M": true,
+    "MAPHUBS_CONFIG": true,
+    "Raven": true
   },
   "plugins": [
     "babel",
-    "react",
-    "flowtype"
+    "flowtype",
+    "security",
+    "unicorn"
   ],
   "settings": {
     "react": {
       "pragma": "React",
-      "version": "16.0"
+      "version": "15.0"
     }
   }
 }

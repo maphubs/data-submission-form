@@ -7,9 +7,9 @@ import styles from '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 let mapboxgl = {}
 let ScalePositionControl
 if (typeof window !== 'undefined') {
-  // eslint-disable-next-line
+  // eslint-disable-next-line security/detect-non-literal-require
   mapboxgl = require(`mapbox-gl`)
-  // eslint-disable-next-line
+  // eslint-disable-next-line security/detect-non-literal-require
   ScalePositionControl = require('mapbox-gl-dual-scale-control')
 }
 
@@ -99,7 +99,6 @@ export default class Map extends React.Component<Props, State> {
 
     map.on('click', (e: any) => {
       if (this.props.onClick) {
-        console.log(e)
         this.props.onClick([e.lngLat.lng, e.lngLat.lat])
       }
     })

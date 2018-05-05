@@ -48,7 +48,7 @@ export default class LocationSearch extends React.Component<Props, State> {
       <SearchBox
         handleSearch={this.handleSearch}
         onOptionClick={this.props.onOptionClick}
-        placeholder="Search for a City or Place"
+        placeholder='Search for a City or Place'
       />
     )
   }

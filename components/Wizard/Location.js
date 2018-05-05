@@ -11,7 +11,7 @@ import config from '../../utils/env'
 
 let mapboxgl = {}
 if (typeof window !== 'undefined') {
-  // eslint-disable-next-line
+  // eslint-disable-next-line security/detect-non-literal-require
   mapboxgl = require(`mapbox-gl`)
 }
 
@@ -77,7 +77,7 @@ class Location extends Component<Props, State> {
     el.style.height = `${markerHeight}px`
 
     ReactDOM.render(
-      <Icon type="environment" style={{ color: 'red', fontSize: `${markerHeight}px` }} />,
+      <Icon type='environment' style={{ color: 'red', fontSize: `${markerHeight}px` }} />,
       el
     )
 
@@ -143,12 +143,12 @@ class Location extends Component<Props, State> {
             >
               <div>
                 <Button
-                  type="primary"
-                  size="large"
+                  type='primary'
+                  size='large'
                   onClick={this.onSelect}
                   disabled={!this.state.selectedCoords}
                 >
-                  Next<Icon type="right" />
+                  Next<Icon type='right' />
                 </Button>
               </div>
             </div>

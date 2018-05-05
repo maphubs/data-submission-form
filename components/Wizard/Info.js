@@ -55,26 +55,26 @@ class InfoForm extends React.Component<Props, void> {
           <Form style={{ height: '100%' }} onSubmit={this.handleSubmit}>
             <FormItem
               {...formItemLayout}
-              label="Business Name"
+              label='Business Name'
               hasFeedback
             >
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Please enter a name' }]
               })(<Input
-                prefix={<Icon type="shop" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Name of Store / Business"
+                prefix={<Icon type='shop' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder='Name of Store / Business'
               />)}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Business Type"
+              label='Business Type'
               hasFeedback
             >
               {getFieldDecorator('type', {
                 rules: [{ required: true, message: 'Please select a type' }]
               })(<Select
-                prefix={<Icon type="shop" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Select a type"
+                prefix={<Icon type='shop' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder='Select a type'
               >
                 {options.map(option => (
                   <Option
@@ -88,7 +88,7 @@ class InfoForm extends React.Component<Props, void> {
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Closed Month"
+              label='Closed Month'
               hasFeedback
             >
               {getFieldDecorator('closed', {
@@ -99,17 +99,17 @@ class InfoForm extends React.Component<Props, void> {
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Rating"
+              label='Rating'
             >
               {getFieldDecorator('rating', {
                 initialValue: 3.5
               })(<Rate style={{ float: 'left' }} />)}
             </FormItem>
-            <Button type="default" size="large" onClick={this.props.onPrev} style={{ position: 'absolute', bottom: '25px', left: '5px' }}>
-              <Icon type="left" />Back
+            <Button type='default' size='large' onClick={this.props.onPrev} style={{ position: 'absolute', bottom: '25px', left: '5px' }}>
+              <Icon type='left' />Back
             </Button>
-            <Button type="primary" size="large" htmlType="submit" style={{ position: 'absolute', bottom: '25px', right: '5px' }}>
-              Next<Icon type="right" />
+            <Button type='primary' size='large' htmlType='submit' style={{ position: 'absolute', bottom: '25px', right: '5px' }}>
+              Next<Icon type='right' />
             </Button>
           </Form>
         </Row>

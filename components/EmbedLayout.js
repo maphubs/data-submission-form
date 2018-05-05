@@ -84,17 +84,15 @@ class EmbedLayout extends React.Component<Props, State> {
     return (
       <div>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta charSet="utf-8" />
-          <title>{title}</title>         
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta charSet='utf-8' />
+          <title>{title}</title>
         </Head>
         <LocaleProvider locale={getAntLocale(language)}>
           <Layout style={{ height: '100vh', minHeight: '100vh', background: 'none' }}>
-            
             {children}
           </Layout>
         </LocaleProvider>
-        
       </div>
     )
   }

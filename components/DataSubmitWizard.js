@@ -131,8 +131,8 @@ class DataSubmitWizard extends React.Component<Props, State> {
         <EmbedLayout title={t('Data Submission Form')} t={t} language={i18n.language}>
           <div style={{ height: '100%', width: '100%', textAlign: 'center' }}>
             <Button
-              type="primary"
-              size="large"
+              type='primary'
+              size='large'
               style={{ top: '50px' }}
               onClick={this.activate}
             >
@@ -185,9 +185,9 @@ class DataSubmitWizard extends React.Component<Props, State> {
           }
         `}
         </style>
-        <div className="data-submit-wizard">
+        <div className='data-submit-wizard'>
           <Row>
-            <div className="wizard-steps-col">
+            <div className='wizard-steps-col'>
               <Col span={24}>
                 <Steps current={current}>
                   {stepContent.map(item => (
@@ -203,28 +203,28 @@ class DataSubmitWizard extends React.Component<Props, State> {
               </Col>
             </div>
           </Row>
-          <div className="wizard-content">          
+          <div className='wizard-content'>
             <Row style={{ height: '100%' }}>
-              <div className="steps-content" style={{ display: current === 0 ? 'block' : 'none' }}>
+              <div className='steps-content' style={{ display: current === 0 ? 'block' : 'none' }}>
                 <Location onSelected={this.onLocationSelected} />
               </div>
-              <div className="steps-content" style={{ display: current === 1 ? 'block' : 'none' }}>
-                <Spin size="large" spinning={this.state.sending} style={{ left: 0, height: '100%' }}>
-                  <Info onSubmit={this.onPropertiesChange} onPrev={() => this.prev()} name="test" />
+              <div className='steps-content' style={{ display: current === 1 ? 'block' : 'none' }}>
+                <Spin size='large' spinning={this.state.sending} style={{ left: 0, height: '100%' }}>
+                  <Info onSubmit={this.onPropertiesChange} onPrev={() => this.prev()} name='test' />
                 </Spin>
               </div>
               {current === 2 &&
-                <div className="steps-content">
+                <div className='steps-content'>
                   <Row style={{ top: '25%' }}>
                     <h3>Thank You!</h3>
                     <p>Thank you for contributing</p>
                   </Row>
                   <Row style={{ top: '50%' }}>
                     <Col span={12}>
-                      <Button type="primary" size="large" onClick={this.onSubmitAnother}>Submit Another Location</Button>
+                      <Button type='primary' size='large' onClick={this.onSubmitAnother}>Submit Another Location</Button>
                     </Col>
                     <Col span={12}>
-                      <Button type="primary" size="large" onClick={this.onComplete}>Done</Button>
+                      <Button type='primary' size='large' onClick={this.onComplete}>Done</Button>
                     </Col>
                   </Row>
                 </div>

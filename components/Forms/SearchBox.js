@@ -83,9 +83,9 @@ export default class SearchBox extends React.Component<Props, State> {
           }
         `}
         </style>
-        <div className="location-search-wrapper" style={{ width: 300 }} >
+        <div className='location-search-wrapper' style={{ width: 300 }} >
           <AutoComplete
-            className="location-search"
+            className='location-search'
             style={{ width: '100%' }}
             onSearch={this.handleSearch}
             placeholder={this.props.placeholder}
