@@ -9,7 +9,7 @@ node node_modules/next/dist/bin/next-export -o .next-export
 
 #docker build
 docker pull node:8-alpine
-docker build . --compress -t quay.io/maphubs/data-submission-form:v$PACKAGE_VERSION
+docker build . --compress --rm -t quay.io/maphubs/data-submission-form:v$PACKAGE_VERSION
 
 #commit version tag
 git add version.json

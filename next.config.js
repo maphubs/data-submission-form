@@ -4,9 +4,15 @@ const path = require('path')
 const pathToMapboxGL = path.resolve(__dirname, './node_modules/mapbox-gl/dist/mapbox-gl.js')
 const { ANALYZE, ASSET_CDN_PREFIX } = process.env
 const useCDN = (ASSET_CDN_PREFIX && process.NODE_ENV === 'production')
+const assetPrefix = useCDN ? ASSET_CDN_PREFIX : ''
+console.log(`assetPrefix: ${assetPrefix}`)
 
 module.exports = {
-  assetPrefix: useCDN ? ASSET_CDN_PREFIX : '',
+  exportPathMap: () => {
+    return {}
+  },
+  assetPrefix,
+  poweredByHeader: false,
   webpack (config, { dev }) {
     if (dev) {
       config.devtool = 'source-map'
