@@ -8,7 +8,7 @@ import { readFileSync } from 'fs'
 let version = ''
 if (process.env.NODE_ENV === 'production') {
   const hash = createHash('sha256')
-  hash.update(readFileSync(`${process.cwd()}/.next/static/style.css`))
+  hash.update(readFileSync(`${process.cwd()}/static/style.css`))
   version = `?v=${hash.digest('hex').substr(0, 8)}`
 }
 
