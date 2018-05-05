@@ -9,4 +9,4 @@ fi
 
 node_modules/less/bin/lessc --compress style.less static/style.css
 
-yarn start
+node server.js

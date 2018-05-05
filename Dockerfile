@@ -3,13 +3,15 @@ LABEL maintainer="Kristofor Carle <kris@maphubs.com>"
 ENV NODE_ENV=production
 
 # Install app dependencies
-RUN apk add --no-cache wget ca-certificates make gcc g++ python libx11-dev libxext
+RUN apk add --no-cache wget ca-certificates libx11-dev libxext && \
+    mkdir -p /app
+
+WORKDIR /app
 
 FROM base AS dependencies
 
-# Create app directory
-RUN mkdir -p /app
-WORKDIR /app
+# Install build dependencies (not copied to release image)
+RUN apk add --no-cache make gcc g++ python 
 
 COPY package.json yarn.lock .yarnclean /app/
 RUN yarn install --production --pure-lockfile && \
@@ -17,8 +19,17 @@ RUN yarn install --production --pure-lockfile && \
 
 # Bundle app source
 FROM base AS release 
-COPY . /app
-COPY --from=dependencies /app/node_modules /app/node_modules
-RUN chmod +x /app/docker-entrypoint.sh
+COPY --from=dependencies /app /app
+COPY ./components /app/components
+COPY ./locales /app/locales
+COPY ./pages /app/pages
+COPY ./types /app/types
+COPY ./utils /app/utils
+COPY ./.next /app/.next
+COPY .babelrc next.config.js server.js server.es6.js config.js client-config.js i18n.js docker-entrypoint.sh version.json style.less /app/
+
+RUN chmod +x /app/docker-entrypoint.sh && \
+    mkdir -p static
+
 EXPOSE 4006
 CMD /app/docker-entrypoint.sh

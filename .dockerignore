@@ -8,3 +8,6 @@ npm-debug.log
 theme.less
 yarn-error.log
 docker-compose.yml
+update-ant-theme.sh
+deploy.sh
+Dockerfile
