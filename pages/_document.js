@@ -8,7 +8,7 @@ import { readFileSync } from 'fs'
 let version = ''
 if (process.env.NODE_ENV === 'production') {
   const hash = createHash('sha256')
-  hash.update(readFileSync(`${process.cwd()}/static/style.css`))
+  hash.update(readFileSync(`${process.cwd()}/dataform/style.css`))
   version = `?v=${hash.digest('hex').substr(0, 8)}`
 }
 
@@ -28,7 +28,7 @@ export default class Document extends Document_ {
     return (
       <html>
         <Head>
-          <link rel='stylesheet' href={`/static/style.css${version}`} />
+          <link rel='stylesheet' href={`/dataform/style.css${version}`} />
         </Head>
         <body>
           <Main />

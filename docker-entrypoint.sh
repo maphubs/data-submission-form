@@ -7,6 +7,6 @@ else
   wget -O /app/theme.less ${REMOTE_THEME}
 fi
 
-node_modules/less/bin/lessc --compress style.less static/style.css
+node_modules/less/bin/lessc --compress style.less dataform/style.css
 
 node server.js

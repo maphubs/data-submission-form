@@ -29,7 +29,7 @@ COPY ./.next /app/.next
 COPY .babelrc next.config.js server.js server.es6.js config.js client-config.js i18n.js docker-entrypoint.sh version.json style.less /app/
 
 RUN chmod +x /app/docker-entrypoint.sh && \
-    mkdir -p static
+    mkdir -p dataform
 
 EXPOSE 4006
 CMD /app/docker-entrypoint.sh
