@@ -1,15 +1,13 @@
 //  @flow
 import React from 'react'
 import { Row, Col, Steps, Button, message, Icon, Spin } from 'antd'
-import { translate } from 'react-i18next'
 import request from 'superagent'
 
-import i18nHelper from '../i18n'
 import EmbedLayout from './EmbedLayout'
 import Location from './Wizard/Location'
 import Info from './Wizard/Info'
-
-import config from '../utils/env'
+import getConfig from 'next/config'
+const config = getConfig().publicRuntimeConfig
 
 const { Step } = Steps
 
@@ -28,7 +26,7 @@ type State = {
   sending: boolean
 }
 
-class DataSubmitWizard extends React.Component<Props, State> {
+export default class DataSubmitWizard extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
     this.state = {
@@ -101,6 +99,7 @@ class DataSubmitWizard extends React.Component<Props, State> {
     const current = this.state.current + 1
     this.setState({ current })
   }
+
   prev () {
     const current = this.state.current - 1
     this.setState({ current })
@@ -128,7 +127,7 @@ class DataSubmitWizard extends React.Component<Props, State> {
 
     if (!active && showActivateButton) {
       return (
-        <EmbedLayout title={t('Data Submission Form')} t={t} language={i18n.language}>
+        <EmbedLayout title='Data Submission Form' language={i18n.language}>
           <div style={{ height: '100%', width: '100%', textAlign: 'center' }}>
             <Button
               type='primary'
@@ -227,8 +226,7 @@ class DataSubmitWizard extends React.Component<Props, State> {
                       <Button type='primary' size='large' onClick={this.onComplete}>Done</Button>
                     </Col>
                   </Row>
-                </div>
-              }
+                </div>}
             </Row>
           </div>
         </div>
@@ -236,14 +234,3 @@ class DataSubmitWizard extends React.Component<Props, State> {
     )
   }
 }
-
-const Extended = translate(['wizard', 'common'], { i18n: i18nHelper, wait: process.browser })(DataSubmitWizard)
-
-// Passing down initial translations
-// use req.i18n instance on serverside to avoid overlapping requests set the language wrong
-Extended.getInitialProps = async ({ req }) => {
-  if (req && !process.browser) return i18nHelper.getInitialProps(req, ['home', 'common'])
-  return {}
-}
-
-export default Extended

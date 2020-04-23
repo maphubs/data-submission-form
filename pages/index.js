@@ -5,7 +5,6 @@ import DataSubmitWizard from '../components/DataSubmitWizard'
 let xcomponent
 
 type Props = {
-  t: any,
   initialI18nStore: any,
   initialLanguage: string
 }

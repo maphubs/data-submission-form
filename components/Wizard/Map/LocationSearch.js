@@ -4,7 +4,8 @@ import request from 'superagent'
 import { message } from 'antd'
 import SearchBox from '../../Forms/SearchBox'
 
-import config from '../../../utils/env'
+import getConfig from 'next/config'
+const config = getConfig().publicRuntimeConfig
 
 type Props = {
   onOptionClick: Function

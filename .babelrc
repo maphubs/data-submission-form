@@ -1,22 +1,19 @@
 {
   "presets": [
-    [
-      "next/babel",
-      {
-        "preset-env": {
-          "modules": "commonjs"
-        }
-      }
-    ],
-    "stage-0"
+    "next/babel",
+    "@babel/preset-flow"
   ],
   "plugins": [
-    "transform-decorators-legacy",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-nullish-coalescing-operator",
+    "@babel/transform-runtime",
+    ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true }],
     [
       "import",
       {
         "libraryName": "antd",
-        "style": false
+        "style": true
       }
     ]
   ]

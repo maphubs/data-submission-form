@@ -7,12 +7,13 @@ import { geolocated } from 'react-geolocated'
 import LocationSearch from './Map/LocationSearch'
 import Map from './Map/Map'
 
-import config from '../../utils/env'
+import getConfig from 'next/config'
+const config = getConfig().publicRuntimeConfig
 
 let mapboxgl = {}
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line security/detect-non-literal-require
-  mapboxgl = require(`mapbox-gl`)
+  mapboxgl = require('mapbox-gl')
 }
 
 type Props = {
@@ -40,7 +41,7 @@ class Location extends Component<Props, State> {
     this.state = {
       viewport: {
         latitude: 39.83,
-        longitude: -73.70,
+        longitude: -73.7,
         zoom: 3
       },
       userLocationUsed: false
@@ -72,7 +73,7 @@ class Location extends Component<Props, State> {
     const markerWidth = 50
     const markerHeight = 50
     const el = document.createElement('div')
-    el.className = `maphubs-marker`
+    el.className = 'maphubs-marker'
     el.style.width = `${markerWidth}px`
     el.style.height = `${markerHeight}px`
 

@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
 
-import scaleStyles from 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
-import styles from '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
+import 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
+import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 
 let mapboxgl = {}
 let ScalePositionControl
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line security/detect-non-literal-require
-  mapboxgl = require(`mapbox-gl`)
+  mapboxgl = require('mapbox-gl')
   // eslint-disable-next-line security/detect-non-literal-require
   ScalePositionControl = require('mapbox-gl-dual-scale-control')
 }
@@ -108,8 +108,6 @@ export default class Map extends React.Component<Props, State> {
     const { id, style, children } = this.props
     return (
       <div style={style}>
-        <style jsx global>{styles}</style>
-        <style jsx global>{scaleStyles}</style>
         <style jsx global>{`
           .mapboxgl-canvas {
             left: 0;
