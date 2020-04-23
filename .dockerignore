@@ -5,7 +5,6 @@ README.md
 node_modules
 npm-debug.log
 .next-export
-theme.less
 yarn-error.log
 docker-compose.yml
 update-ant-theme.sh

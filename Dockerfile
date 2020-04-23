@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=builder /app .
 COPY . .
 EXPOSE 4006
-CMD ["node", "/app/server.js"]
+CMD ["yarn", "run", "next", "start"]
