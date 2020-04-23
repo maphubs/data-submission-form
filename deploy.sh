@@ -5,7 +5,7 @@ ASSET_CDN_PREFIX=https://hpvhe47439ygwrt.belugacdn.link/maphubs/data-submission-
 
 #next.js build and export assets
 yarn run next build
-yarn run next export
+yarn run next export -o .next-export
 
 #docker build
 docker pull node:12-alpine
