@@ -42,12 +42,6 @@ module.exports = withCSS(withLess({
       config.devtool = 'source-map'
     }
 
-    config.resolve = {
-      alias: {
-        'mapbox-gl': 'mapbox-gl/dist/mapbox-gl.js'
-      }
-    }
-
     config.node = {
       fs: 'empty'
     }
