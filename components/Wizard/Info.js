@@ -1,6 +1,9 @@
 // @flow
 import React from 'react'
-import { Row, Form, Input, Icon, DatePicker, Select, Button, Rate } from 'antd'
+import { LeftOutlined, RightOutlined, ShopOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Row, Input, DatePicker, Select, Button, Rate } from 'antd'
 
 const FormItem = Form.Item
 const { Option } = Select
@@ -40,6 +43,7 @@ class InfoForm extends React.Component<Props, void> {
       }
     })
   }
+
   render () {
     const { getFieldDecorator } = this.props.form
     const formItemLayout = {
@@ -48,11 +52,11 @@ class InfoForm extends React.Component<Props, void> {
     }
     return (
       <div style={{ height: '100%', padding: '2%' }}>
-        <Row style={{ height: '50px' }}>
+        <Row justify='center' align='middle' style={{ height: '50px', width: '100%' }}>
           <h3>Please provide some information about the business</h3>
         </Row>
-        <Row style={{ height: 'calc(100% - 50px)' }}>
-          <Form style={{ height: '100%' }} onSubmit={this.handleSubmit}>
+        <Row justify='center' align='middle' style={{ height: 'calc(100% - 50px)', width: '100%' }}>
+          <Form style={{ height: '100%', width: '100%' }} onSubmit={this.handleSubmit}>
             <FormItem
               {...formItemLayout}
               label='Business Name'
@@ -61,7 +65,7 @@ class InfoForm extends React.Component<Props, void> {
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Please enter a name' }]
               })(<Input
-                prefix={<Icon type='shop' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<ShopOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder='Name of Store / Business'
               />)}
             </FormItem>
@@ -73,7 +77,7 @@ class InfoForm extends React.Component<Props, void> {
               {getFieldDecorator('type', {
                 rules: [{ required: true, message: 'Please select a type' }]
               })(<Select
-                prefix={<Icon type='shop' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<ShopOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder='Select a type'
               >
                 {options.map(option => (
@@ -106,10 +110,10 @@ class InfoForm extends React.Component<Props, void> {
               })(<Rate style={{ float: 'left' }} />)}
             </FormItem>
             <Button type='default' size='large' onClick={this.props.onPrev} style={{ position: 'absolute', bottom: '25px', left: '5px' }}>
-              <Icon type='left' />Back
+              <LeftOutlined />Back
             </Button>
             <Button type='primary' size='large' htmlType='submit' style={{ position: 'absolute', bottom: '25px', right: '5px' }}>
-              Next<Icon type='right' />
+              Next<RightOutlined />
             </Button>
           </Form>
         </Row>

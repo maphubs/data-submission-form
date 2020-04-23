@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { Layout, ConfigProvider } from 'antd'
 
 type Props = {
-  language: string,
   title: string,
   children: any
 }

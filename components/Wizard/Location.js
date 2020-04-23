@@ -1,14 +1,12 @@
 //  @flow
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Row, Icon, Button } from 'antd'
+import { EnvironmentOutlined, RightOutlined } from '@ant-design/icons'
+import { Row, Button } from 'antd'
 import { geolocated } from 'react-geolocated'
 
 import LocationSearch from './Map/LocationSearch'
 import Map from './Map/Map'
-
-import getConfig from 'next/config'
-const config = getConfig().publicRuntimeConfig
 
 let mapboxgl = {}
 if (typeof window !== 'undefined') {
@@ -78,7 +76,7 @@ class Location extends Component<Props, State> {
     el.style.height = `${markerHeight}px`
 
     ReactDOM.render(
-      <Icon type='environment' style={{ color: 'red', fontSize: `${markerHeight}px` }} />,
+      <EnvironmentOutlined style={{ color: 'red', fontSize: `${markerHeight}px` }} />,
       el
     )
 
@@ -97,12 +95,12 @@ class Location extends Component<Props, State> {
     const map = this.map.getMap()
     console.log(feature)
     /* eslint-disable no-underscore-dangle */
-    if (feature.boundingbox) {
-      map.fitBounds(feature.boundingbox, {
+    if (feature.bbox) {
+      map.fitBounds(feature.bbox, {
         padding: 25, curve: 3, speed: 0.6, maxZoom: 16
       })
-    } else if (feature.lat && feature.lon) {
-      map.flyTo({ center: [feature.lon, feature.lat] })
+    } else if (feature.center) {
+      map.flyTo({ center: [feature.center[0], feature.center[1]] })
     }
   }
 
@@ -112,14 +110,15 @@ class Location extends Component<Props, State> {
 
   render () {
     const { viewport } = this.state
+    const { latitude, longitude, zoom } = viewport
     return (
       <div style={{ width: '100%', height: '100%' }}>
         <Row style={{ height: '100%' }}>
           <Map
             ref={(map) => { this.map = map }}
             style={{ width: '100%', height: '100%' }}
-            {...viewport}
-            mapStyle={`https://maps.tilehosting.com/styles/streets/style.json?key=${config.TILEHOSTING_MAPS_API_KEY}`}
+            latitude={latitude} longitude={longitude} zoom={zoom}
+            mapStyle='mapbox://styles/mapbox/streets-v11'
             onClick={this.onMapClick}
             showScale
             hash
@@ -149,7 +148,7 @@ class Location extends Component<Props, State> {
                   onClick={this.onSelect}
                   disabled={!this.state.selectedCoords}
                 >
-                  Next<Icon type='right' />
+                  Next<RightOutlined />
                 </Button>
               </div>
             </div>

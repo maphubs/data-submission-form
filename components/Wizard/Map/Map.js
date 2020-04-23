@@ -3,6 +3,8 @@ import React from 'react'
 
 import 'mapbox-gl-dual-scale-control/dist/mapbox-gl-dual-scale-control.css'
 import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
+import getConfig from 'next/config'
+const config = getConfig().publicRuntimeConfig
 
 let mapboxgl = {}
 let ScalePositionControl
@@ -66,6 +68,7 @@ export default class Map extends React.Component<Props, State> {
       latitude, longitude, zoom // initial position
     } = this.props
 
+    mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
     const map = new mapboxgl.Map({
       container: id,
       style: mapStyle,

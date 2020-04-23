@@ -1,6 +1,7 @@
 //  @flow
 import React from 'react'
-import { Row, Col, Steps, Button, message, Icon, Spin } from 'antd'
+import { Icon as LegacyIcon } from '@ant-design/compatible'
+import { Row, Col, Steps, Button, message, Spin } from 'antd'
 import request from 'superagent'
 
 import EmbedLayout from './EmbedLayout'
@@ -127,7 +128,7 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
 
     if (!active && showActivateButton) {
       return (
-        <EmbedLayout title='Data Submission Form' language={i18n.language}>
+        <EmbedLayout title='Data Submission Form'>
           <div style={{ height: '100%', width: '100%', textAlign: 'center' }}>
             <Button
               type='primary'
@@ -143,7 +144,7 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
     }
 
     return (
-      <EmbedLayout title={t('Data Submission Form')} t={t} language={i18n.language}>
+      <EmbedLayout title='Data Submission Form'>
         <style jsx>{`
           .data-submit-wizard {
             height: 100%;
@@ -155,6 +156,7 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
             background-color: #fafafa;
             min-height: 200px;
             height: 100%;
+            width: 100%;
             text-align: center;
           }
           
@@ -164,28 +166,32 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
 
           .wizard-steps-col {
             height: 75px;
+            width: 100%;
             padding: 10px;
           }
 
           .wizard-content {
             height: calc(100% - 75px);
+            width: 100%;
           }
 
           @media (max-width: 576px) {
 
             .wizard-content {
               height: 100%;
+              width: 100%;
             }
 
             .wizard-steps-col {
               height: 0px;
+              width: 100%;
               display: none;
             }
           }
         `}
         </style>
         <div className='data-submit-wizard'>
-          <Row>
+          <Row style={{width: '100%'}}>
             <div className='wizard-steps-col'>
               <Col span={24}>
                 <Steps current={current}>
@@ -195,7 +201,7 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
                       key={item.title}
                       title={item.title}
                       description={item.description}
-                      icon={<Icon type={item.icon} />}
+                      icon={<LegacyIcon type={item.icon} />}
                     />
                   ))}
                 </Steps>
@@ -203,7 +209,7 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
             </div>
           </Row>
           <div className='wizard-content'>
-            <Row style={{ height: '100%' }}>
+            <Row style={{ height: '100%', width: '100%' }}>
               <div className='steps-content' style={{ display: current === 0 ? 'block' : 'none' }}>
                 <Location onSelected={this.onLocationSelected} />
               </div>
@@ -214,11 +220,11 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
               </div>
               {current === 2 &&
                 <div className='steps-content'>
-                  <Row style={{ top: '25%' }}>
+                  <Row style={{ top: '25%', width: '100%' }}>
                     <h3>Thank You!</h3>
                     <p>Thank you for contributing</p>
                   </Row>
-                  <Row style={{ top: '50%' }}>
+                  <Row style={{ top: '50%', width: '100%' }}>
                     <Col span={12}>
                       <Button type='primary' size='large' onClick={this.onSubmitAnother}>Submit Another Location</Button>
                     </Col>

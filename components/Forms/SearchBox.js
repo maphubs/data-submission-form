@@ -2,49 +2,33 @@
 import React from 'react'
 import { AutoComplete } from 'antd'
 
-const { Option } = AutoComplete
-
 type Props = {
   handleSearch: Function,
   onOptionClick: Function,
   placeholder: string
 }
 type State = {
-  result: Array<{key: string, value: string}>
+  results: Array<{key: string, value: string}>
 }
 
 export default class SearchBox extends React.Component<Props, State> {
   state = {
-    result: []
+    results: []
   }
 
-  onSelect = (key: string) => {
-    console.log(`selecting: ${key}`)
-    const { onOptionClick } = this.props
-    this.state.result.forEach((item) => {
-      if (item.key === key) {
-        console.log(`FOUND: ${key}`)
-        onOptionClick(item)
-      }
-    })
+  onSelect = (value: string, item: any) => {
+    console.log(`selecting: ${item}`)
+    this.props.onOptionClick(item)
   }
 
   handleSearch = async (value: string) => {
-    const result = await this.props.handleSearch(value)
-    this.setState({ result })
+    const results = await this.props.handleSearch(value)
+    this.setState({ results })
   }
 
   render () {
-    const { result } = this.state
-    let options = []
-    if (result) {
-      options = result.map(value => (
-        <Option
-          key={value.key}
-        >{value.value}
-        </Option>
-      ))
-    }
+    const { results } = this.state
+
     return (
       <div>
         <style jsx>{`
@@ -83,13 +67,13 @@ export default class SearchBox extends React.Component<Props, State> {
           }
         `}
         </style>
-        <div className='location-search-wrapper' style={{ width: 300 }} >
+        <div className='location-search-wrapper' style={{ width: 300 }}>
           <AutoComplete
             className='location-search'
             style={{ width: '100%' }}
             onSearch={this.handleSearch}
             placeholder={this.props.placeholder}
-            dataSource={options}
+            options={results}
             onSelect={this.onSelect}
             allowClear
           />

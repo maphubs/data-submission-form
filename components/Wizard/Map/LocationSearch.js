@@ -18,24 +18,23 @@ export default class LocationSearch extends React.Component<Props, State> {
     this.state = {}
   }
 
-  handleSearch = (value: string) => {
-    if (!value) return null
-    const url = `https://geocoder.tilehosting.com/q/${value}.js?key=${config.TILEHOSTING_GEOCODING_API_KEY}`
+  handleSearch = (query: string) => {
+    if (!query) return null
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${config.MAPBOX_ACCESS_TOKEN}&autocomplete=true`
+
     return request.get(url)
       .then((res) => {
-        const { count, results } = res.body
-        if (count > 0 && results) {
-          const features = results.map((feature) => {
-            /* eslint-disable camelcase */
-            const { id, name, display_name } = feature
+        const { features } = res.body
+        if (features && features.length > 0) {
+          const featuresCleaned = features.map((feature) => {
             return {
-              key: `${id}`,
-              value: display_name || name,
+              key: `${feature.id}`,
+              value: feature.matching_place_name || feature.place_name || feature.text,
               feature
             }
           })
-          return (features)
-        } // else
+          return featuresCleaned
+        } // elsefeatures
         throw new Error('features not found')
       })
       .catch((err) => {
