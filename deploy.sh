@@ -4,11 +4,11 @@ PACKAGE_VERSION=`node -p "require('./version.json').version"`
 ASSET_CDN_PREFIX=https://hpvhe47439ygwrt.belugacdn.link/maphubs/data-submission-form
 
 #next.js build and export assets
-node --max_old_space_size=4096 node_modules/next/dist/bin/next-build
-node node_modules/next/dist/bin/next-export -o .next-export
+yarn run next build
+yarn run next export
 
 #docker build
-docker pull node:8-alpine
+docker pull node:12-alpine
 docker build . --compress --rm -t quay.io/maphubs/data-submission-form:v$PACKAGE_VERSION
 
 #commit version tag
