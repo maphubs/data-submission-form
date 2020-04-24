@@ -221,8 +221,8 @@ export default class DataSubmitWizard extends React.Component<Props, State> {
               {current === 2 &&
                 <div className='steps-content'>
                   <Row style={{ top: '25%', width: '100%' }}>
-                    <h3>Thank You!</h3>
-                    <p>Thank you for contributing</p>
+                    <h3 style={{ width: '100%' }}>Thank You!</h3>
+                    <p style={{ width: '100%' }}>Thank you for contributing</p>
                   </Row>
                   <Row style={{ top: '50%', width: '100%' }}>
                     <Col span={12}>
