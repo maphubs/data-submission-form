@@ -14,6 +14,10 @@ type State = {
 }
 
 export default class MapHubsDataSubmission extends React.Component<Props, State> {
+  static getInitialProps ({res}: {res: any}) {
+    return { }
+  }
+
   constructor () {
     super()
     this.state = {
