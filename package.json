@@ -39,7 +39,7 @@
     "mapbox-gl": "^1.9.1",
     "mapbox-gl-dual-scale-control": "^0.1.1",
     "moment": "^2.22.1",
-    "next": "9.3.5",
+    "next": "11.1.0",
     "null-loader": "^4.0.0",
     "numeral": "^2.0.6",
     "query-string": "^6.1.0",
